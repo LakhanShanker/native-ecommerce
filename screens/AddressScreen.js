@@ -45,7 +45,7 @@ const AddressScreen = () => {
     };
     if (name && mobileNo && houseNo && street && postalcode && city) {
       axios
-        .post("http://10.0.2.2:8000/addresses", { userId, address })
+        .post("https://native-ecommerce.onrender.com/addresses", { userId, address })
         .then((res) => {
           Alert.alert("Success", "Address added successfully");
           setName("");

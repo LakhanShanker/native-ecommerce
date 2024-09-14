@@ -16,7 +16,6 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
-import SplashScreen from "./SplashScreen";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,7 +44,7 @@ const LoginScreen = () => {
       navigation.replace('Main');
       return;
     }
-    axios.post('http://10.0.2.2:8000/login', user).then((res)=>{
+    axios.post('https://native-ecommerce.onrender.com/login', user).then((res)=>{
         const token = res.data.token;
         AsyncStorage.setItem('authToken', token);
         navigation.replace('Main');
