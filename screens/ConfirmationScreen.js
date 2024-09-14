@@ -48,7 +48,7 @@ const ConfirmationScreen = () => {
         shippingAddress : selectedAddress,
         paymentMethod : 'card'
       }
-      const res = await axios.post('http://10.0.2.2:8000/orders',orderData);
+      const res = await axios.post('https://native-ecommerce.onrender.com/orders',orderData);
       if(res.status === 200){
         navigation.navigate('Order');
         dispatch(clearCart());
@@ -68,7 +68,7 @@ const ConfirmationScreen = () => {
   }, []);
   const fetchAddresses = async () => {
     try {
-      const response = await axios(`http://10.0.2.2:8000/addresses/${userId}`);
+      const response = await axios(`https://native-ecommerce.onrender.com/addresses/${userId}`);
       const { addresses } = response.data;
       setAddresses(addresses);
     } catch (err) {
@@ -84,7 +84,7 @@ const ConfirmationScreen = () => {
         shippingAddress : selectedAddress,
         paymentMethod : selectedoption
       }
-      const res = await axios.post('http://10.0.2.2:8000/orders',orderData);
+      const res = await axios.post('https://native-ecommerce.onrender.com/orders',orderData);
       if(res.status === 200){
         navigation.navigate('Order');
         dispatch(clearCart());

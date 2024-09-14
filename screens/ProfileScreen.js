@@ -42,7 +42,7 @@ const ProfileScreen = () => {
   useEffect(()=>{
     const fetchUserProfile = async () => {
       try{
-        const res = await axios.get(`http://10.0.2.2:8000/profile/${userId}`);
+        const res = await axios.get(`https://native-ecommerce.onrender.com/profile/${userId}`);
         const {user} = res.data;
         setUser(user);
       }catch(err){
@@ -71,7 +71,7 @@ const ProfileScreen = () => {
   useEffect(()=> {
     const fetchOrders = async () => {      
       try{
-        const res = await axios.get(`http://10.0.2.2:8000/orders/${userId}`);
+        const res = await axios.get(`https://native-ecommerce.onrender.com/orders/${userId}`);
         console.log(res);
         
         const orders = res.data.orders;

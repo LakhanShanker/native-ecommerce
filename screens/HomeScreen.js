@@ -67,7 +67,7 @@ const HomeScreen = () => {
   }, []);
   const fetchAddresses = async () => {
     try {
-      const response = await axios(`http://10.0.2.2:8000/addresses/${userId}`);
+      const response = await axios(`https://native-ecommerce.onrender.com/addresses/${userId}`);
       const { addresses } = response.data;
       setAddresses(addresses);
     } catch (err) {

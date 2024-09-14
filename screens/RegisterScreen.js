@@ -27,7 +27,7 @@ const RegisterScreen = () => {
       password: password,
     };
     axios
-      .post("http://10.0.2.2:8000/register", user)
+      .post("https://native-ecommerce.onrender.com/register", user)
       .then((response) => {
         Alert.alert(
           "Registeration Successful",
