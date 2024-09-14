@@ -3,19 +3,20 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-
+require('dotenv').config();
+const DB = process.env.DATABASE
+const url = process.env.BASE_URL
 const app = express();
 const port = 8000;
 const cors = require("cors");
 app.use(cors());
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const jwt = require("jsonwebtoken");
 mongoose
   .connect(
-    "mongodb+srv://lakhanshanker12345:lakhan@cluster0.uzzkc.mongodb.net/",
+   DB,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -47,7 +48,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
     from: "lakhan.com",
     to: email,
     subject: "Email Verification",
-    text: `Plese click on the verification link to verify your mail : http://localhost:8000/verify/${verificationToken}`,
+    text: `Plese click on the verification link to verify your mail : ${url}/verify/${verificationToken}`,
   };
   try {
     await transporter.sendMail(mailOptions);
