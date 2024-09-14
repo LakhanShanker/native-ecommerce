@@ -7,7 +7,7 @@ require('dotenv').config();
 const DB = process.env.DATABASE
 const url = process.env.BASE_URL
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 const cors = require("cors");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
