@@ -38,7 +38,7 @@ const AddAddressScreen = () => {
     },[])
   );
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 20 }}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View
         style={{
           backgroundColor: "#00CED1",

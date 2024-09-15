@@ -20,7 +20,7 @@ const ProductInfoScreen = () => {
     },5000)
   }
   return (
-   <ScrollView style={{marginTop:20, flex:1, backgroundColor:'white'}} showsVerticalScrollIndicator={false}>
+   <ScrollView style={{flex:1, backgroundColor:'white'}} showsVerticalScrollIndicator={false}>
     <View
           style={{
             backgroundColor: "#00CED1",
