@@ -62,7 +62,7 @@ const RegisterScreen = () => {
   };
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center", marginTop:20 }}
+      style={{ flex: 1, backgroundColor: "white", alignItems: "center"}}
     >
       <View>
         <Image

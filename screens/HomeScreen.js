@@ -307,7 +307,6 @@ const HomeScreen = () => {
     <>
       <SafeAreaView
         style={{
-          paddingTop: 20,
           flex: 1,
           backgroundColor: "white",
         }}

@@ -29,7 +29,7 @@ const deleteItem = (item) => {
   dispatch(removeFromCart(item));
 }
   return (
-     cart.length > 0 ? <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 20 }}>
+     cart.length > 0 ? <ScrollView showsVerticalScrollIndicator={false}>
       <View
         style={{
           backgroundColor: "#00CED1",

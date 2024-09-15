@@ -65,7 +65,7 @@ const LoginScreen = () => {
     >
       <View>
         <Image
-          style={{ height: 100, width: 150, marginTop: 40 }}
+          style={{ height: 100, width: 150, marginTop: 80 }}
           source={{
             uri: "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
           }}

@@ -105,8 +105,8 @@ const ProfileScreen = () => {
       </View>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal>
         {loading ? (<Text>Loading....</Text>): order.length > 0 ? (
-          order.map((item)=> (
-            <Pressable key={item.id} style={{marginTop:20, padding:15, borderRadius:8, borderWidth:1, borderColor:'#d0d0d0', marginHorizontal:10, justifyContent:'center', alignItems:'center'}}>
+          order.map((item, index)=> (
+            <Pressable key={index} style={{marginTop:20, padding:15, borderRadius:8, borderWidth:1, borderColor:'#d0d0d0', marginHorizontal:10, justifyContent:'center', alignItems:'center'}}>
               {item.products.slice(0,1).map((product)=>(
                 <View key={product.id}>
                   <Image style={{width:100, height:100, resizeMode:'contain'}} source={{uri:product.image}}/>
