@@ -70,14 +70,16 @@ const ProfileScreen = () => {
   const [loading,setLoading] = useState(true);
   useEffect(()=> {
     const fetchOrders = async () => {      
+      setLoading(true);
       try{
         const res = await axios.get(`https://native-ecommerce.onrender.com/orders/${userId}`);
         console.log(res);
         
         const orders = res.data.orders;
         setOrder(orders);
-        setLoading(false)
+        setLoading(false);
       }catch(err){
+        setLoading(false);
         console.log('errer fetching order', err); 
       }
     }

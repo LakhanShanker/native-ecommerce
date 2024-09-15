@@ -46,19 +46,20 @@ const RegisterScreen = () => {
       })
       .catch((error) => {
         if(error.message.includes('400')){
+          setLoading(false);
           Alert.alert(
             "Registeration failed",
             "User already registered"
           );
         }
         else{
+          setLoading(false);
           Alert.alert(
             "Registeration error",
             "Error occured during registeration"
           );
         }
         console.log("Registeration failed", error.message);
-        setLoading(false);
       });
     }
     else{
