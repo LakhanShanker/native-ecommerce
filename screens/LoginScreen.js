@@ -21,6 +21,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
   useEffect(()=> {
     const checkLoginStatus = async () => {
       try{
@@ -36,6 +37,7 @@ const LoginScreen = () => {
   },[])
 
   const handleLogin = ()=> {
+    setLoading(true);
     const user = {
         email:email,
         password:password
@@ -48,10 +50,14 @@ const LoginScreen = () => {
         const token = res.data.token;
         AsyncStorage.setItem('authToken', token);
         navigation.replace('Main');
+        setLoading(false);
     }).catch((err)=>{
         Alert.alert("Login Error", "Invalid Email");
         console.log('Error', err);
     })
+  }
+  if(loading){
+    <Text>Loading...</Text>
   }
   return (
     <SafeAreaView
@@ -59,7 +65,7 @@ const LoginScreen = () => {
     >
       <View>
         <Image
-          style={{ height: 100, width: 150, marginTop: 80 }}
+          style={{ height: 100, width: 150, marginTop: 40 }}
           source={{
             uri: "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
           }}
@@ -67,7 +73,7 @@ const LoginScreen = () => {
       </View>
       <KeyboardAvoidingView>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 40 }}>
+          <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 20 }}>
             Login to your account
           </Text>
         </View>
