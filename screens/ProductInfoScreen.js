@@ -53,8 +53,24 @@ const ProductInfoScreen = () => {
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
 {
-  route.params.carouselImages.map((item,index)=>(
-    <ImageBackground source={{uri:item}} key={index} style={{height,width,marginTop:25, resizeMode:'contain'}}>
+  route?.params?.carouselImages.length === 1 ? route?.params?.carouselImages?.map((item,index)=>(
+    <Pressable style={{marginTop:10}}>
+            <View style={{padding:20,alignItems:'center', flexDirection:'row', justifyContent:'space-between', zIndex:1}}>
+    <View style={{height:40,width:40, backgroundColor:'#C60C30',justifyContent:'center', alignItems:'center', flexDirection:'row', borderRadius:20}}>
+<Text style={{color:'white', textAlign:'center', fontWeight:'600', fontSize:15}}>20%</Text>
+    </View>
+    <View style={{height:40,width:40, backgroundColor:'#E0E0E0',justifyContent:'center', alignItems:'center', flexDirection:'row', borderRadius:20}}>
+    <FontAwesome name="share" size={24} color="black" />
+    </View>
+      </View>
+    <Image source={{uri:item}} key={index}  style={{height,width, marginTop:-50,resizeMode:'contain'}}/>
+      <View style={{height:40,width:40, backgroundColor:'#E0E0E0',justifyContent:'center', alignItems:'center', flexDirection:'row', borderRadius:20, marginTop:'auto', marginLeft:20}}>
+      <AntDesign name="hearto" size={24} color="black" />
+      </View>
+      </Pressable>
+  )) :
+  route?.params?.carouselImages?.map((item,index)=>(
+    <ImageBackground source={{uri:item}} key={index}  style={{height,width,marginTop:15, resizeMode:'contain'}}>
       <View style={{padding:20, alignItems:'center', flexDirection:'row', justifyContent:'space-between'}}>
     <View style={{height:40,width:40, backgroundColor:'#C60C30',justifyContent:'center', alignItems:'center', flexDirection:'row', borderRadius:20}}>
 <Text style={{color:'white', textAlign:'center', fontWeight:'600', fontSize:15}}>20%</Text>
@@ -67,7 +83,7 @@ const ProductInfoScreen = () => {
       <AntDesign name="hearto" size={24} color="black" />
       </View>
       </ImageBackground>
-  ))
+  ))  
 }
         </ScrollView>
         <View style={{padding:10}}>

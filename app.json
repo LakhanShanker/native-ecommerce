@@ -12,14 +12,18 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/computer.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.lakhanshanker.ecommerce"
+      "package": "com.lakhanshanker.ecommerce",
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,6 +32,9 @@
       "eas": {
         "projectId": "97f4dbd2-edf1-4ffd-bb81-6ff0de9c54e4"
       }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/97f4dbd2-edf1-4ffd-bb81-6ff0de9c54e4"
     }
   }
 }

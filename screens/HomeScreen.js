@@ -434,7 +434,7 @@ const HomeScreen = () => {
               >
                 <Image
                   source={{ uri: item.image }}
-                  style={{ width: 180, height: 180, resizeMode: "contain" }}
+                  style={{ width: 170, height: 160, resizeMode: "contain" }}
                 />
               </Pressable>
             ))}

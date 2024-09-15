@@ -8,6 +8,7 @@ import {
   TextInput,
   Pressable,
   Alert,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import Fontisto from "@expo/vector-icons/Fontisto";
@@ -26,40 +27,55 @@ const RegisterScreen = () => {
       email: email,
       password: password,
     };
-    axios
+    const regex = /\S+@\S+\.\S+/;
+    if(regex.test(email)){
+      axios
       .post("https://native-ecommerce.onrender.com/register", user)
       .then((response) => {
         Alert.alert(
           "Registeration Successful",
-          "You have registered with us successfully"
+          "We have sent you verification link to your mail id"
         );
         setName("");
         setEmail("");
         setPassword("");
       })
-      .catch((error) => {        
-        Alert.alert(
-          "Registeration error",
-          "Error occured during registeration"
-        );
-        console.log("Registeration failed", error);
+      .catch((error) => {
+        if(error.message.includes('400')){
+          Alert.alert(
+            "Registeration failed",
+            "User already registered"
+          );
+        }
+        else{
+          Alert.alert(
+            "Registeration error",
+            "Error occured during registeration"
+          );
+        }
+        console.log("Registeration failed", error.message);
       });
+    }
+    else{
+      Alert.alert('Invaild Email','Please enter valid email address')
+    }
   };
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "white", alignItems: "center", marginTop:50 }}
+      style={{ flex: 1, backgroundColor: "white", alignItems: "center", marginTop:20 }}
     >
       <View>
         <Image
-          style={{ height: 100, width: 150, marginTop: 80 }}
+          style={{ height: 100, width: 150, marginTop: 20 }}
           source={{
             uri: "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
           }}
         />
       </View>
+      <ScrollView>
       <KeyboardAvoidingView>
         <View style={{ alignItems: "center" }}>
-          <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 40 }}>
+          <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 20 }}>
             Register to your account
           </Text>
         </View>
@@ -117,6 +133,8 @@ const RegisterScreen = () => {
                 marginVertical: 10,
                 fontSize: email ? 20 : 18,
               }}
+              textContentType="emailAddress"
+              keyboardType="email-address"
               placeholder="Enter your email"
               value={email}
               onChangeText={(text) => setEmail(text)}
@@ -199,6 +217,7 @@ const RegisterScreen = () => {
           </Text>
         </Pressable>
       </KeyboardAvoidingView>
+      </ScrollView>
     </SafeAreaView>
   );
 };

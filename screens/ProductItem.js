@@ -2,10 +2,12 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { addToCart } from '../redux/CartReducer'
 import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const ProductItem = ({item}) => {
   const [addedToCart, setAddedToCart] = useState(false);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const handleAddToCart = (item) => {
     setAddedToCart(true);
     dispatch(addToCart(item));
@@ -14,8 +16,19 @@ const ProductItem = ({item}) => {
     },5000)
   }
   return (
-   <Pressable style={{marginHorizontal:25, marginVertical:30}}>
-        <Image source={{uri:item.image}} style={{width:150,height:150, resizeMode:'contain'}}/>
+   <Pressable style={{marginHorizontal:15, marginVertical:30}} onPress={() =>
+    navigation.navigate("Info", {
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      color: item.color || "Silver",
+      size: item.size || 'Normal',
+      oldPrice: item.oldPrice,
+      item: item,
+      carouselImages: item.carouselImages ? item.carouselImages : [item.image],
+    })
+  }>
+        <Image source={{uri:item.image}} style={{width:120,height:120, resizeMode:'contain', margin:'auto'}}/>
         <Text style={{width:150, marginTop:10}} numberOfLines={1}>{item.title}</Text>
         <View style={{marginTop:5, flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
             <Text style={{fontSize:15,fontWeight:'bold'}}>₹{item.price}</Text>
