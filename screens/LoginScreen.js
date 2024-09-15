@@ -28,9 +28,11 @@ const LoginScreen = () => {
       try{
         const token = AsyncStorage.getItem('authToken');
         if(token){
+          setLoading(false);
           navigation.replace('Main');
         }
       }catch(err){
+        setLoading(false);
         console.log('error login', err);
       }
       checkLoginStatus();
@@ -44,19 +46,19 @@ const LoginScreen = () => {
         password:password
     }
     if(email === 'admin@gmail.com' && password === 'admin'){
-      navigation.replace('Main');
       setLoading(false);
+      navigation.replace('Main');
       return;
     }
     axios.post('https://native-ecommerce.onrender.com/login', user).then((res)=>{
         const token = res.data.token;
         AsyncStorage.setItem('authToken', token);
-        navigation.replace('Main');
         setLoading(false);
+        navigation.replace('Main');
     }).catch((err)=>{
+        setLoading(false);
         Alert.alert("Login Error", "Invalid Email");
         console.log('Error', err);
-        setLoading(false);
     })
   }
   return (
