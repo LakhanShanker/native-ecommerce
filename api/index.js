@@ -5,7 +5,7 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 require('dotenv').config();
 const DB = process.env.DATABASE
-const url = process.env.BASE_URL
+const url = "https://native-ecommerce.onrender.com/"
 const app = express();
 const port = process.env.PORT || 8000;
 const cors = require("cors");
@@ -48,7 +48,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
     from: "lakhan.com",
     to: email,
     subject: "Email Verification",
-    text: `Plese click on the verification link to verify your mail : ${url}/verify/${verificationToken}`,
+    text: `Plese click on the verification link to verify your mail : https://native-ecommerce.onrender.com/verify/${verificationToken}`,
   };
   try {
     await transporter.sendMail(mailOptions);

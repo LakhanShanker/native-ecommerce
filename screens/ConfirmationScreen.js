@@ -1,12 +1,12 @@
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { UserType } from '../UserContext';
 import axios from 'axios';
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { clearCart } from '../redux/CartReducer';
 import RazorpayCheckout from 'react-native-razorpay';
 const ConfirmationScreen = () => {
@@ -66,6 +66,11 @@ const ConfirmationScreen = () => {
   useEffect(() => {
     fetchAddresses();
   }, []);
+  useFocusEffect(
+    useCallback(()=>{
+      fetchAddresses();
+    },[])
+  );
   const fetchAddresses = async () => {
     try {
       const response = await axios(`https://native-ecommerce.onrender.com/addresses/${userId}`);
@@ -127,6 +132,31 @@ const ConfirmationScreen = () => {
           <View style={{marginHorizontal:20}}>
             <Text style={{fontSize:16, fontWeight:'bold'}}>Select Delivery Address</Text>
             <Pressable>
+            <Pressable
+              onPress={() => {
+                navigation.navigate("NewAddress");
+              }}
+              style={{
+                width: 140,
+                height: 140,
+                borderColor: "#D0D0D0",
+                marginTop: 10,
+                borderWidth: 1,
+                padding: 10,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "#0066b2",
+                  fontWeight: "500",
+                }}
+              >
+                Add an Address or pick-up point
+              </Text>
+            </Pressable>
               {addresses?.map((item,index)=> (
                 <Pressable key={index} onPress={()=> setSelectedAddress(item)} style={{borderWidth:1, borderColor:'#d0d0d0', padding:10, flexDirection:'row', gap:5,paddingBottom:15, alignItems:'center', marginVertical:8, borderRadius:6}}>
 {(selectedAddress && selectedAddress._id === item._id) ? (<AntDesign name="checkcircleo" size={20} color="#008397" />) : (<Entypo name="circle" size={20} color="black" />)}

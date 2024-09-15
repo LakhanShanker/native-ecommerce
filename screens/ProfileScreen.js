@@ -1,4 +1,4 @@
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Alert, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -83,7 +83,9 @@ const ProfileScreen = () => {
     }
     fetchOrders();
   },[])
-  console.log(order);
+  setTimeout(()=>{
+    setLoading(false);
+  },3000)
   return (
     <ScrollView style={{padding:10, flex:1, backgroundColor:'white'}}>
       <Text style={{fontSize:16, fontWeight:'bold'}}>Welcome {user?.name}</Text>
@@ -104,7 +106,9 @@ const ProfileScreen = () => {
         </Pressable>
       </View>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal>
-        {loading ? (<Text>Loading....</Text>): order.length > 0 ? (
+        {loading ? (<View style={{flex: 1, justifyContent:'center', paddingTop:30}}>
+      <ActivityIndicator size="large" />
+    </View>): order.length > 0 ? (
           order.map((item, index)=> (
             <Pressable key={index} style={{marginTop:20, padding:15, borderRadius:8, borderWidth:1, borderColor:'#d0d0d0', marginHorizontal:10, justifyContent:'center', alignItems:'center'}}>
               {item.products.slice(0,1).map((product)=>(
@@ -114,7 +118,7 @@ const ProfileScreen = () => {
               ))}
             </Pressable>
           ))
-        ) : (<Text>No Order Found</Text>)}
+        ) : (<Text  style={{textAlign:'center', fontSize:16, fontWeight:'bold'}}>No Order Found</Text>)}
       </ScrollView>
     </ScrollView>
   );
