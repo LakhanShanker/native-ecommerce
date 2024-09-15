@@ -23,6 +23,7 @@ const AddressScreen = () => {
   const [city, setCity] = useState("");
   const { userId, setUserId } = useContext(UserType);
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchUser = async () => {
       const token = await AsyncStorage.getItem("authToken");
@@ -34,6 +35,7 @@ const AddressScreen = () => {
   }, []);
 
   const handleAddAddress = () => {
+    setLoading(true);
     const address = {
       name,
       mobileNo,
@@ -55,20 +57,27 @@ const AddressScreen = () => {
           setLandmark("");
           setPostalcode("");
           setCity("");
+          setLoading(false);
           setTimeout(() => {
             navigation.goBack();
           }, 500);
         })
         .catch((err) => {
           console.log("error", err);
+          setLoading(false);
           Alert.alert("Error", "Failed to add address");
         });
     } else {
+      setLoading(false);
       Alert.alert("Alert", "Enter all mandatory fields");
     }
   };
   return (
-    <ScrollView>
+    loading ? (
+      <View style={ {flex: 1, justifyContent:'center'}}>
+      <ActivityIndicator size="large" />
+    </View>
+    ) :(<ScrollView>
       <View style={{ height: 50, backgroundColor: "#00CED1" }} />
       <View style={{ padding: 10 }}>
         <Text style={{ fontSize: 17, fontWeight: "bold" }}>
@@ -217,7 +226,7 @@ const AddressScreen = () => {
           <Text style={{ fontWeight: "bold" }}>Add Address</Text>
         </Pressable>
       </View>
-    </ScrollView>
+    </ScrollView>)
   );
 };
 

@@ -8,6 +8,7 @@ import {
   TextInput,
   Pressable,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Fontisto from "@expo/vector-icons/Fontisto";
@@ -44,6 +45,7 @@ const LoginScreen = () => {
     }
     if(email === 'admin@gmail.com' && password === 'admin'){
       navigation.replace('Main');
+      setLoading(false);
       return;
     }
     axios.post('https://native-ecommerce.onrender.com/login', user).then((res)=>{
@@ -54,13 +56,15 @@ const LoginScreen = () => {
     }).catch((err)=>{
         Alert.alert("Login Error", "Invalid Email");
         console.log('Error', err);
+        setLoading(false);
     })
   }
-  if(loading){
-    <Text>Loading...</Text>
-  }
   return (
-    <SafeAreaView
+    loading ? (
+      <View style={ {flex: 1, justifyContent:'center'}}>
+      <ActivityIndicator size="large" />
+    </View>
+    ) : (<SafeAreaView
       style={{ flex: 1, backgroundColor: "white", alignItems: "center" }}
     >
       <View>
@@ -186,7 +190,8 @@ const LoginScreen = () => {
           </Text>
         </Pressable>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </SafeAreaView>)
+    
   );
 };
 

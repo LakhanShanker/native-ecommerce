@@ -8,6 +8,7 @@ import {
   TextInput,
   Pressable,
   Alert,
+  ActivityIndicator,
   ScrollView,
 } from "react-native";
 import React, { useState } from "react";
@@ -20,8 +21,10 @@ const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const handleRegister = () => {
+    setLoading(true);
     const user = {
       name: name,
       email: email,
@@ -39,6 +42,7 @@ const RegisterScreen = () => {
         setName("");
         setEmail("");
         setPassword("");
+        setLoading(false);
       })
       .catch((error) => {
         if(error.message.includes('400')){
@@ -54,14 +58,20 @@ const RegisterScreen = () => {
           );
         }
         console.log("Registeration failed", error.message);
+        setLoading(false);
       });
     }
     else{
+      setLoading(false);
       Alert.alert('Invaild Email','Please enter valid email address')
     }
   };
   return (
-    <SafeAreaView
+    loading ? (
+      <View style={ {flex: 1, justifyContent:'center'}}>
+      <ActivityIndicator size="large" />
+    </View>
+    ) : (<SafeAreaView
       style={{ flex: 1, backgroundColor: "white", alignItems: "center"}}
     >
       <View>
@@ -218,7 +228,7 @@ const RegisterScreen = () => {
         </Pressable>
       </KeyboardAvoidingView>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView>)
   );
 };
 
