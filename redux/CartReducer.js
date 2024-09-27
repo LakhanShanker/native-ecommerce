@@ -4,6 +4,7 @@ export const CartSlice = createSlice({
     name:'cart',
     initialState:{
         cart:[],
+        wishlist:[]
     },
     reducers:{
         addToCart:(state,action)=>{
@@ -37,10 +38,17 @@ export const CartSlice = createSlice({
         },
         clearCart:(state)=>{
             state.cart=[];
-        }
+        },
+        addToWishlist:(state,action)=>{
+                state.wishlist.push(action.payload);
+        },
+        removeFromWishlist:(state,action)=>{
+            const removeItem = state.wishlist.filter((item)=> item.id !== action.payload.id);
+            state.wishlist = removeItem;
+        },
     }
 })
 
-export const { addToCart,removeFromCart,incrementQuantity,decrementQuantity,clearCart} = CartSlice.actions;
+export const { addToCart,removeFromCart,incrementQuantity,decrementQuantity,clearCart, addToWishlist, removeFromWishlist} = CartSlice.actions;
 
 export default CartSlice.reducer;

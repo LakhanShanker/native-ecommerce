@@ -118,7 +118,7 @@ const deleteItem = (item) => {
           }
       </View>
     </ScrollView> : <View>
-      <Text style={{marginTop:50, fontSize:20, fontWeight:'bold'}}>Ops nothing is added to cart</Text>
+      <Text style={{marginTop:100, fontSize:20, fontWeight:'bold', textAlign:'center'}}>Ops nothing is added to cart</Text>
     </View>
   );
 };
